@@ -31,7 +31,7 @@ int main()
         }
 
         ++i;                         // Counting the items; Adds 1 to i
-        discount = discount / 100;   // Turns the percent into decimal for calulations
+        discount = discount / 100;   // Converts the percent into decimal for calulations
         dsc_amt = price * discount;  // Calculates the amount of discount
         dsc_price = price - dsc_amt; // Caculates the discounted price
         total += dsc_price;          // Adding the discounted price for the current item to the total
