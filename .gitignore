@@ -83,5 +83,6 @@ dkms.conf
 
 ## Workspace Specific Ignores ##
 /bin/*
+/practice/bin/*
 !bin/README.md
 
