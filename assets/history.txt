@@ -1,0 +1,7 @@
+Joel Quitnyn 22 125.00 55.00 29.0
+John Doe 21 31.25 41.50 12.8
+Michael Scott 32 150.00 64.00 25.7
+Peter Parker 19 180.00 62.00 32.9
+Joe West 43 186.00 75.00 23.2
+Barry Allen 32 176.00 68.00 26.8
+Hunter Zolomon 31 175.00 70.00 25.1
