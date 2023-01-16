@@ -5,3 +5,8 @@ Peter Parker 19 180.00 62.00 32.9
 Joe West 43 186.00 75.00 23.2
 Barry Allen 32 176.00 68.00 26.8
 Hunter Zolomon 31 175.00 70.00 25.1
+Kanye West 45 196.00 68.00 29.8
+Mary Jane 34 184.30 68.00 28.0
+James Gunn 54 187.50 75.00 23.4
+Oliver Queen 46 203.00 76.00 24.7
+Richie Rich 16 112.00 56.00 25.1

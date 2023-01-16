@@ -9,23 +9,24 @@ Output all variables and the calculated BMI to a file.
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include <stdlib.h> //For system function e.g system("clear")
+#include <string.h> //For string functions e.g. strcpy(char[], "string")
+#include <unistd.h> //For sleep function
 
 void main()
 {
-    FILE *h_add;
-    FILE *h_read;
+    FILE *h_file = fopen("assets/history.txt", "a+"); //Initializing and opening file in read and write mode.
 
+    //Variables for use in program
     char f_name[20], l_name[20], name[40], line_44[] = "-------------------------------------------";
     float weight, height, bmi;
     int age, ch;
 
-
+    //Main execution loop
     while (1) {
 
-        system("clear");
+        system("clear"); 
+        //UI-UX
         printf("%34s", "Body Mass Idex Calculator");
         printf("\n%s\n", line_44);
 
@@ -39,7 +40,8 @@ void main()
         system("clear");
 
         if (ch == 1) {
-            h_add = fopen("assets/history.txt", "a");
+            
+            fseek(h_file, 0, SEEK_END); //Placing pointer at the end of the file for appending.
 
             printf("%34s", "Body Mass Idex Calculator");
             printf("\n%s\n", line_44);
@@ -59,15 +61,16 @@ void main()
             printf("Height (inches): ");
             scanf("%f", &height);
 
-            bmi = (weight / (height * height)) * 703;
+            bmi = (weight / (height * height)) * 703; //Calculate BMI
 
-            fprintf(h_add, "%s %s %d %.2f %.2f %.1f\n", f_name, l_name, age, weight, height, bmi);
+            fprintf(h_file, "%s %s %d %.2f %.2f %.1f\n", f_name, l_name, age, weight, height, bmi); //Appending info to the file.
 
             system("clear");
 
             printf("%34s", "Body Mass Idex Calculator");
             printf("\n%s\n", line_44);
 
+            //Printing entered & calculated information
             printf("Name: %s %s \n", f_name, l_name);
             printf("Age: %d \n", age);
             printf("Weight: %.2f \n", weight);
@@ -75,6 +78,7 @@ void main()
             printf("Your BMI is %.1f \n", bmi);
             printf("You are ");
 
+            //Checking BMI score
             if (bmi < 18.5)
             {
                 printf("Underweight");
@@ -95,39 +99,43 @@ void main()
                 printf("Obese");
             }
 
+            //Logic to restart main loop
             printf("\n\n\nEnter 1 to continue\n> ");
             scanf("%d", &ch);
             if (ch == 1){continue;}
-            fclose(h_add);
+
         }
 
         if (ch == 2) {
             printf("%34s", "Body Mass Idex Calculator");
             printf("\n%s\n", line_44);
-
-            h_read = fopen("assets/history.txt", "r");
             
-            if (!h_read || feof(h_read)){
+            rewind(h_file); //Placing pointer at the begining of file for reading.
+            fscanf(h_file, "%s", f_name);
+            
+            //Checking if file exists and has info
+            if (!h_file || feof(h_file)){
                 printf("No Previous Entries\n");
                 sleep(2);
                 continue;
             }
 
-            fscanf(h_read, "%s", f_name);
             printf("Name            Age  Weight  Height   BMI");
             printf("\n%s\n", line_44);
 
-            while (!feof(h_read))
+            while (!feof(h_file)) //Checking if file pointer is at the end.
             {
-                fscanf(h_read, "%s %d %f %f %f", l_name, &age, &weight, &height, &bmi);
+                //Reding info from file
+                fscanf(h_file, "%s %d %f %f %f", l_name, &age, &weight, &height, &bmi);
+                //Creating name string for formatted output
                 strcpy(name, f_name); strcat(name, " "); strcat(name, l_name);
 
+                //Outputing formatted info
                 printf("%-15s %3d %7.2f %7.2f %5.1f\n", name, age, weight, height, bmi);
-                fscanf(h_read, "%s", f_name);
+                fscanf(h_file, "%s", f_name);
             }
-            
-            fclose(h_read);
 
+            //Logic to restart main loop
             printf("\n\n\nEnter 1 to continue\n> ");
             scanf("%d", &ch);
             if (ch == 1){continue;}
@@ -142,4 +150,6 @@ void main()
         }
 
     }
+
+    fclose(h_file); //Closing file
 }
